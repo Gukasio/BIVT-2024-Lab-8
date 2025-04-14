@@ -18,7 +18,7 @@ public class Blue_3 : Blue
     }
     public override void Review(){
         if (string.IsNullOrEmpty(_input)) return;
-        string[] t  = _input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+        var t = _input.Split(new[] { ' ', '.', '!', '?', ',', ':', '\"', ';', '–', '(', ')', '[', ']', '{', '}', '/' }, StringSplitOptions.RemoveEmptyEntries);
         if (t.Length == 0) return;
         string bukv = "";
         foreach(string w in t){
@@ -66,7 +66,7 @@ public class Blue_3 : Blue
             string ans = "";
             foreach(var el in _output)
             {
-                ans += $"{el.Item1} - {el.Item2:F4}\n";
+                ans += $"{el.Item1} - {el.Item2:f4}\n";
             }
             return ans.TrimEnd('\n');
         }

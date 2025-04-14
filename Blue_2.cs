@@ -14,7 +14,7 @@ public class Blue_2 : Blue
     {
         if (string.IsNullOrEmpty(Posled)|| string.IsNullOrEmpty(_input)||string.IsNullOrWhiteSpace(_input))
             {
-                Output = null;
+                Output = string.Empty;
                 return;
             }
         string[] t = _input.Split(' ');
@@ -36,6 +36,7 @@ public class Blue_2 : Blue
     
     public override string ToString()
     {
+        if (string.IsNullOrEmpty(Output)||Output.Length == 0) return string.Empty;
         return Output;
     }
 }

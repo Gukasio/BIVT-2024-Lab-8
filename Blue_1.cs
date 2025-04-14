@@ -9,18 +9,18 @@ public class Blue_1 : Blue
     }
     public override void Review(){
         if (_input == null) return;
-        string[] t = _input.Split(' ');
+        string[] t = _input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         string[] res = new string[t.Length];
         int k=0;
         string l = "";
         foreach(string w in t){
-            if (string.IsNullOrWhiteSpace(w)) continue;
-            if (l.Length==0) l = w;
+            if (string.IsNullOrWhiteSpace(w) || string.IsNullOrEmpty(_input)) continue;
+            if (l.Length==0) l += w;
             else if (l.Length + w.Length + 1 <=50){
                 l += " " + w;
             }
             else{
-                res[k++] = l;
+                res[k++] = l + ' ';
                 l= w;
             }
         }
