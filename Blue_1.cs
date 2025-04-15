@@ -20,7 +20,7 @@ public class Blue_1 : Blue
                 l += " " + w;
             }
             else{
-                res[k++] = l + ' ';
+                res[k++] = l;
                 l= w;
             }
         }
@@ -35,7 +35,8 @@ public class Blue_1 : Blue
             if (_output == null) return null;
             string r = "";
             foreach (string ri in _output){
-                r += $"{ri}\n";
+                r += $"{ri}";
+                r += Environment.NewLine;
             }
             if (string.IsNullOrEmpty(r)) return null;
             r = r.Remove(r.Length-1, 1);

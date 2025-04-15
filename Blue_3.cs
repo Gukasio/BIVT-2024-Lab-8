@@ -22,7 +22,7 @@ public class Blue_3 : Blue
         if (t.Length == 0) return;
         string bukv = "";
         foreach(string w in t){
-            if (w.Length == 0) continue;
+            if (string.IsNullOrEmpty(w)) continue;
             char perv = char.ToLower(w[0]);
             if (!bukv.Contains(perv) && char.IsLetter(perv)) bukv += perv;
         }
@@ -40,9 +40,9 @@ public class Blue_3 : Blue
                 }
             }
         }
-        int totalVal = 0;
-        foreach (var item in ks){
-            totalVal += item.k;
+        double totalVal = 0.0;
+        foreach (string item in t){
+            if (char.IsLetter(item[0]) || (item.Length>1 && char.IsLetter(item[1]))) totalVal++;
         }   
         if (totalVal == 0){
             _output = new (char,double)[0];
