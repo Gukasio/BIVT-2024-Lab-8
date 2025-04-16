@@ -5,15 +5,15 @@ namespace Lab_8{
 public class Blue_2 : Blue
 {
     private string _output;
-    private string _posled;
+    private string _posl;
     public string Output => _output;
-    public Blue_2(string input, string posled) : base(input){
-        _posled = posled;
+    public Blue_2(string input, string posl) : base(input){
+        _posl = posl;
         _output = null;
     }
     public override void Review()
     {
-        if (string.IsNullOrEmpty(_posled)|| string.IsNullOrEmpty(_input))
+        if (string.IsNullOrEmpty(_posl)|| string.IsNullOrEmpty(_input))
             {
                 _output = string.Empty;
                 return;
@@ -23,7 +23,7 @@ public class Blue_2 : Blue
         string probel = "";
         foreach (string w in t){
             if (string.IsNullOrWhiteSpace(w) || string.IsNullOrEmpty(w)) continue;
-            if(!w.ToLower().Contains(_posled.ToLower())){
+            if(!w.ToLower().Contains(_posl.ToLower())){
                     ans += probel + w;
                     probel = " ";
                 }
@@ -31,7 +31,7 @@ public class Blue_2 : Blue
                 ans += " " + w[0] + w[0];
                 probel = " ";
             }
-            if (w.Length >0 && char.IsPunctuation(w[w.Length -1])){
+            if (w.Length >0 && w.ToLower().Contains(_posl.ToLower()) && !(char.IsLetter(w[w.Length -1]))){
                 ans+=w[w.Length -1];
                 probel = " ";
             }

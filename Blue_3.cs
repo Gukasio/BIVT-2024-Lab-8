@@ -8,46 +8,51 @@ public class Blue_3 : Blue
     public (char, double)[] Output{
         get{
             if (_output == null) return null;
-            (char,double)[] copy = new (char,double)[_output.Length];
-            Array.Copy(_output, copy,_output.Length);
-            return copy;
+            (char,double)[] c = new (char,double)[_output.Length];
+            Array.Copy(_output, c,_output.Length);
+            return c;
         }
     }
     public Blue_3(string input) : base(input){
-        _output = new (char,double)[0];
+        _output = null;
     }
     public override void Review(){
-        if (string.IsNullOrEmpty(_input)) return;
+        if (string.IsNullOrEmpty(_input)){
+            _output = null;
+            return;
+        }
         var t = _input.Split(new[] { ' ', '.', '!', '?', ',', ':', '\"', ';', '–', '(', ')', '[', ']', '{', '}', '/' }, StringSplitOptions.RemoveEmptyEntries);
-        if (t.Length == 0) return;
         string bukv = "";
         foreach(string w in t){
             if (string.IsNullOrEmpty(w)) continue;
             char perv = char.ToLower(w[0]);
-            if (!bukv.Contains(perv) && char.IsLetter(perv)) bukv += perv;
+            if (!bukv.Contains(perv) && char.IsLetter(perv)){
+                bukv+=perv;
+            }
         }
+
         (char l, int k)[] ks = new (char l, int k)[bukv.Length];
-        for(int i=0;i<bukv.Length;i++){
-            ks[i].l = bukv[i];
-            ks[i].k = 0;
+        for(int j=0;j<bukv.Length;j++){
+            ks[j].l = bukv[j];
+            ks[j].k = 0;
         }
         foreach (string w in t){
+            if (string.IsNullOrEmpty(w)) continue;
             char fb = char.ToLower(w[0]);
             for (int i=0;i<bukv.Length;i++){
-                if (ks[i].l == fb && char.IsLetter(fb)){
+                if (ks[i].l == fb){
                     ks[i].k++;
                     break;
                 }
             }
         }
-        double totalVal = 0.0;
+        double total = 0.0;
+        double r = 0.0;
         foreach (string item in t){
-            if (char.IsLetter(item[0]) || (item.Length>1 && char.IsLetter(item[1]))) totalVal++;
+            if (char.IsLetter(item[0]) || (item.Length>1 && char.IsLetter(item[1]))){
+                total++;
+            }
         }   
-        if (totalVal == 0){
-            _output = new (char,double)[0];
-            return;
-        }
         for (int i=0;i<ks.Length;i++){
             for(int j=0;j<ks.Length - i - 1;j++){
                 if ((ks[j].k == ks[j+1].k && ks[j].l > ks[j+1].l) || ks[j].k < ks[j+1].k){
@@ -57,18 +62,25 @@ public class Blue_3 : Blue
         }
         (char, double)[] ans = new (char, double)[ks.Length];
         for(int i =0;i<ks.Length;i++){
-            ans[i] = (ks[i].l, ks[i].k / (double)totalVal * 100);
+            r = ks[i].k / total;
+            ans[i] = (ks[i].l, (double)r * 100);
         }
         _output = ans;
     }
         public override string ToString()
         {
+            if (_output == null) return null;
             string ans = "";
-            foreach(var el in _output)
+            int p = _output.Length -1;
+            for(int k = 0; k<_output.Length;k++)
             {
-                ans += $"{el.Item1} - {el.Item2:f4}\n";
+                ans += $"{_output[k].Item1} - {_output[k].Item2:f4}\n";
+                if (k < p){
+                    ans+=Environment.NewLine;
+                }
             }
-            return ans.TrimEnd('\n');
+            ans = ans.TrimEnd('\n');
+            return ans;
         }
 
     }

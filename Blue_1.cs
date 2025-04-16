@@ -9,13 +9,15 @@ public class Blue_1 : Blue
     }
     public override void Review(){
         if (_input == null) return;
+        int k=0;
         string[] t = _input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         string[] res = new string[t.Length];
-        int k=0;
         string l = "";
         foreach(string w in t){
-            if (string.IsNullOrWhiteSpace(w) || string.IsNullOrEmpty(_input)) continue;
-            if (l.Length==0) l += w;
+            if (string.IsNullOrWhiteSpace(w) || string.IsNullOrEmpty(w)) continue;
+            if (l.Length==0) {
+                l = w;
+            }
             else if (l.Length + w.Length + 1 <=50){
                 l += " " + w;
             }
@@ -34,12 +36,16 @@ public class Blue_1 : Blue
         {
             if (_output == null) return null;
             string r = "";
-            foreach (string ri in _output){
-                r += $"{ri}";
-                r += Environment.NewLine;
+            int p = _output.Length - 1;
+            for (int j =0;j < _output.Length; j++){
+                r += $"{_output[j]}";
+                if (j < p)
+                {
+                    r += Environment.NewLine;
+                }
             }
             if (string.IsNullOrEmpty(r)) return null;
-            r = r.Remove(r.Length-1, 1);
+            r = r.TrimEnd();
             return r;
         }
 
