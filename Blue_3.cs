@@ -74,7 +74,7 @@ public class Blue_3 : Blue
             int p = _output.Length -1;
             for(int k = 0; k<_output.Length;k++)
             {
-                ans += $"{_output[k].Item1} - {_output[k].Item2:f4}\n";
+                ans += $"{_output[k].Item1} - {_output[k].Item2:f4}";
                 if (k < p){
                     ans+=Environment.NewLine;
                 }
